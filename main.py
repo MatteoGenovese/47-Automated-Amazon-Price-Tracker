@@ -23,7 +23,7 @@ def sendEmail(products):
             msg += f"{product['url']}\n{product['title']}\n{product['price']}\n\n\n"
         print(msg)
         connection.sendmail(from_addr=password.myEmail, to_addrs="matteo.genovese@icloud.com",
-                            msg=msg)
+                            msg=msg.encode('utf-8'))
         connection.close()
 
 
@@ -53,7 +53,7 @@ for product in products_to_track:
         productAlert = {
             "url": product["url"],
             "title": title,
-            "price": price_as_float,
+            "price": "{:.2f}".format(price_as_float)+"€",
         }
         product_with_good_price.append(productAlert)
 if len(product_with_good_price) > 0:
